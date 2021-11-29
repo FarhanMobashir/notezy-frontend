@@ -111,7 +111,7 @@ export default function SignIn() {
           ) : null}
           <h1>SignIn</h1>
           {errorMessage ? (
-            <h4 style={{ color: "red" }}>
+            <h4 style={{ color: "red", textAlign: "center" }}>
               Invalid email or password combination
             </h4>
           ) : null}

@@ -8,16 +8,21 @@ import {
 } from "./styles/Containers.style";
 import { ViewPill } from "./styles/Pills.style";
 
-export const NotesCard = ({ noteHeading, notePreview, link }) => {
+export const NotesCard = ({ noteHeading, notePreview, link, handleDelete }) => {
   return (
     <Card>
       <Flex justifyContent="space-between" alignItems="center">
         <NoteHeading>{noteHeading}</NoteHeading>
+      </Flex>
+      <NotePreview>{notePreview}</NotePreview>
+      <Flex justifyContent="space-between" alignItems="center">
+        <ViewPill bgColor="#ff683b" onClick={handleDelete}>
+          Delete
+        </ViewPill>
         <NavLink to={link}>
           <ViewPill>View</ViewPill>
         </NavLink>
       </Flex>
-      <NotePreview>{notePreview}</NotePreview>
     </Card>
   );
 };

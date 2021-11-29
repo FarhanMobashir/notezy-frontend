@@ -15,6 +15,7 @@ export default function PrivateRoute({ children }) {
   let location = useLocation();
   if (!isAuthenticated()) {
     return <Navigate to="/" state={{ from: location }} />;
+  } else {
+    return children;
   }
-  return children;
 }

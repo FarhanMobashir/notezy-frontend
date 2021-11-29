@@ -88,7 +88,7 @@ export default function SignUp() {
         >
           <h1>SignUp</h1>
           {errorMessage ? (
-            <h4 style={{ color: "red" }}>
+            <h4 style={{ color: "red", textAlign: "center" }}>
               Email already in use, please select a unique one
             </h4>
           ) : null}

@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { SecondaryButton, TertiaryButton } from "./styles/Buttons.style";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  TertiaryButton,
+} from "./styles/Buttons.style";
 import { Flex } from "./styles/Containers.style";
 import { ViewPill } from "./styles/Pills.style";
 import { Outlet } from "react-router-dom";
@@ -13,10 +17,17 @@ import { useNavigate } from "react-router-dom";
 const Heading = styled.h1`
   text-decoration: none;
   color: black;
+  text-align: center;
 
   @media (max-width: 480px) {
     font-size: 20px;
   }
+`;
+
+const SubHeading = styled.p`
+  color: ${({ theme }) => theme.colors.black300};
+  text-align: center;
+  margin: 0;
 `;
 
 const Image = styled.img`
@@ -65,11 +76,13 @@ export default function HomePage() {
   );
 }
 
-export const HomeGreet = () => {
+export const HomeGreet = ({ heading, subHeading }) => {
   return (
     <>
       <Flex justifyContent="center" alignItems="center" flexDirection="column">
-        <Heading>Welcome back !</Heading>
+        <Heading>{heading}</Heading>
+        <SubHeading>{subHeading}</SubHeading>
+
         <Image src={notebook} />
       </Flex>
       <Flex justifyContent="center" alignItems="center">
@@ -77,7 +90,7 @@ export const HomeGreet = () => {
           <SecondaryButton margin="0px 10px">All notes</SecondaryButton>
         </Link>
         <Link to="/home/new">
-          <TertiaryButton margin="0px 10px">Create New</TertiaryButton>
+          <PrimaryButton margin="0px 10px">Create New</PrimaryButton>
         </Link>
       </Flex>
     </>

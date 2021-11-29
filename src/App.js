@@ -24,7 +24,15 @@ function App() {
           </PrivateRoute>
         }
       >
-        <Route path="/home" element={<HomeGreet />} />
+        <Route
+          path="/home"
+          element={
+            <HomeGreet
+              heading="Welcome back 👋"
+              subHeading="Start making your notes"
+            />
+          }
+        />
         <Route path="all" element={<AllNotes />} />
         <Route path="new" element={<CreateNew />} />
         <Route path="notes/:noteId" element={<NoteView />} />
