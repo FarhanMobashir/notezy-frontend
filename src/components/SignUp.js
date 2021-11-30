@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { useState, useRef } from "react/cjs/react.development";
 import { PrimaryButton } from "./styles/Buttons.style";
 import { Flex } from "./styles/Containers.style";
 import { TextInput } from "./styles/Inputs.style";

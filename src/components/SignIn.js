@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
 import { useAuth } from "../contexts/AuthContext";
 import { isAuthenticated } from "./PrivateRoute";
 import { SkeletonLoader } from "./SkeletonNotesLoader";
