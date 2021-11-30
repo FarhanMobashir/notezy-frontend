@@ -39,5 +39,6 @@
   },
   "resolutions": {
     "styled-components": "^5"
-  }
+  },
+  "proxy": "https://notezy.herokuapp.com"
 }
