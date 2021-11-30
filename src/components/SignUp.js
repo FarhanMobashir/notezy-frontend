@@ -13,7 +13,6 @@ export default function SignUp() {
   const navigate = useNavigate();
   const [errorMessage, showErrorMessage] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [validationError, setValidationError] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -39,7 +38,6 @@ export default function SignUp() {
           navigate("/signin");
         })
         .catch((err) => {
-          setError(err);
           showErrorMessage(true);
           setLoading(false);
 
@@ -48,6 +46,7 @@ export default function SignUp() {
     }, 200);
   }
   function isValidEmail(email) {
+    // eslint-disable-next-line
     return email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
   }
 

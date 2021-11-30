@@ -15,7 +15,6 @@ export default function SignIn() {
   const navigate = useNavigate();
   const [errorMessage, showErrorMessage] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [validationError, setValidationError] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -50,7 +49,6 @@ export default function SignIn() {
           navigate("/home");
         })
         .catch((err) => {
-          setError(err);
           showErrorMessage(true);
           setLoading(false);
           console.error(err);
@@ -58,7 +56,9 @@ export default function SignIn() {
     }, 10);
   }
   function isValidEmail(email) {
-    return email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+    // eslint-disable-next-line
+    let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return email.match(re);
   }
 
   function isValidPassword(password) {
