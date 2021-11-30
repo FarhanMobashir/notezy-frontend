@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthContext";
 import { SkeletonLoader } from "./SkeletonNotesLoader";
@@ -14,7 +14,7 @@ export default function CreateNew() {
   const [showError, setShowError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState({});
-  const navigate = useNavigate();
+
   const titleRef = useRef();
   const contentRef = useRef();
   const { currentUser } = useAuth();

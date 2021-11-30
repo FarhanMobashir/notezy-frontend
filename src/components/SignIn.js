@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import { useAuth } from "../contexts/AuthContext";
+import { isAuthenticated } from "./PrivateRoute";
 import { SkeletonLoader } from "./SkeletonNotesLoader";
 import { PrimaryButton } from "./styles/Buttons.style";
 import { Flex } from "./styles/Containers.style";
@@ -18,7 +19,7 @@ export default function SignIn() {
   const [validationError, setValidationError] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { currentUser, setCurrentUser } = useAuth();
+  const { setCurrentUser } = useAuth();
   function signIn(formData) {
     const apiUrl = "https://notezy.herokuapp.com";
     setLoading(true);
@@ -92,6 +93,10 @@ export default function SignIn() {
     return null;
   }, []);
 
+  if (isAuthenticated()) {
+    return <Navigate to="/home" />;
+  }
+
   return (
     <>
       {loading ? (
@@ -134,7 +139,7 @@ export default function SignIn() {
           <Flex justifyContent="space-between" alignItems="center">
             <p>Want to create account ?</p>
             <Link to="/signup">
-              <ViewPill>Signup</ViewPill>
+              <ViewPill margin="0px 10px">Signup</ViewPill>
             </Link>
           </Flex>
         </Flex>

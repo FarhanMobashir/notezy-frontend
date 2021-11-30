@@ -4,7 +4,19 @@ export const Flex = styled.div`
   display: flex;
   justify-content: ${(props) => props.justifyContent};
   align-items: ${(props) => props.alignItems};
-  flex-direction: ${(props) => props.flexDirection || "row"};
+  border-radius: ${(props) => props.borderRadius};
+  border: ${(props) => props.border};
+  margin: ${(props) => props.margin};
+  flex-direction: ${(props) => {
+    switch (props.flexDirection) {
+      case "row":
+        return "row";
+      case "column":
+        return "column";
+      default:
+        return "row";
+    }
+  }};
   flex: ${(props) => props.flex || "0"};
   height: ${(props) => props.height};
   background-color: ${(props) => props.bgColor};

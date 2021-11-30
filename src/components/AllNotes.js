@@ -4,6 +4,7 @@ import { SkeletonNotesLoader } from "./SkeletonNotesLoader";
 import { Flex } from "./styles/Containers.style";
 import { useAuth } from "../contexts/AuthContext";
 import { HomeGreet } from "./HomePage";
+import Modal from "./Modal";
 
 export default function AllNotes() {
   const apiUrl = "https://notezy.herokuapp.com";
@@ -11,6 +12,8 @@ export default function AllNotes() {
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [deleteCall, setDeleteCall] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [noteId, setNoteId] = useState("");
   useEffect(() => {
     fetch(apiUrl + "/api/note", {
       method: "GET",
@@ -32,11 +35,18 @@ export default function AllNotes() {
         setLoading(false);
         console.error(err);
       });
-  }, [deleteCall]);
+  }, [deleteCall, currentUser.token]);
 
   function deleteHandler(item) {
+    setNoteId(item._id);
+    setShowModal(true);
+  }
+
+  function confirmDelete() {
     setDeleteCall(true);
-    fetch(apiUrl + `/api/note/${item._id}`, {
+    setShowModal(false);
+
+    fetch(apiUrl + `/api/note/${noteId}`, {
       method: "DELETE",
       headers: {
         // "Content-Type": "application/json",
@@ -65,8 +75,12 @@ export default function AllNotes() {
       flexDirection="row"
       wrap="wrap"
     >
-      {loading || deleteCall ? (
+      {loading ? (
         <>
+          <SkeletonNotesLoader />
+          <SkeletonNotesLoader />
+          <SkeletonNotesLoader />
+          <SkeletonNotesLoader />
           <SkeletonNotesLoader />
           <SkeletonNotesLoader />
           <SkeletonNotesLoader />
@@ -74,9 +88,23 @@ export default function AllNotes() {
           <SkeletonNotesLoader />
         </>
       ) : notes.length === 0 ? (
-        <HomeGreet
-          heading="You haven't created any notes"
-          subHeading="Create one in just few clicks"
+        <Flex
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="row"
+          wrap="wrap"
+        >
+          <HomeGreet
+            heading="You haven't created any notes"
+            subHeading="Create one in just few clicks"
+          />
+        </Flex>
+      ) : showModal ? (
+        <Modal
+          primaryHandler={() => confirmDelete()}
+          cancelHandler={() => {
+            setShowModal(false);
+          }}
         />
       ) : (
         notes

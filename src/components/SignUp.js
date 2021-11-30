@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState, useRef } from "react/cjs/react.development";
 import { PrimaryButton } from "./styles/Buttons.style";
 import { Flex } from "./styles/Containers.style";
@@ -7,6 +7,7 @@ import { TextInput } from "./styles/Inputs.style";
 import { ViewPill } from "./styles/Pills.style";
 import { useNavigate } from "react-router-dom";
 import { SkeletonLoader } from "./SkeletonNotesLoader";
+import { isAuthenticated } from "./PrivateRoute";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -74,6 +75,9 @@ export default function SignUp() {
       signUp(data);
     }
   }
+  if (isAuthenticated()) {
+    return <Navigate to="/home" />;
+  }
   return (
     <>
       {loading ? (
@@ -85,6 +89,7 @@ export default function SignUp() {
           alignItems="center"
           flexDirection="column"
           flex="1"
+          bgColor="white"
         >
           <h1>SignUp</h1>
           {errorMessage ? (
@@ -112,7 +117,7 @@ export default function SignUp() {
           <Flex justifyContent="space-between" alignItems="center">
             <p>Already have an account ?</p>
             <Link to="/signin">
-              <ViewPill>Signin</ViewPill>
+              <ViewPill margin="0px 10px">Signin</ViewPill>
             </Link>
           </Flex>
         </Flex>

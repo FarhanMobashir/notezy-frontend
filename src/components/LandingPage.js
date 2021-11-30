@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { PrimaryButton, SecondaryButton } from "./styles/Buttons.style";
 import { Flex } from "./styles/Containers.style";
 import notes from "../assets/notes.svg";
+import { isAuthenticated } from "./PrivateRoute";
 const Heading = styled.h1`
   font-size: 48px;
   margin: 0px;
@@ -20,6 +21,9 @@ const Image = styled.img`
 `;
 
 export default function LandingPage() {
+  if (isAuthenticated()) {
+    return <Navigate to="/home" />;
+  }
   return (
     <Flex
       height="100vh"

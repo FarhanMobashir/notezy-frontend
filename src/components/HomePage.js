@@ -11,7 +11,6 @@ import { Outlet } from "react-router-dom";
 
 import notebook from "../assets/notebook.svg";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Heading = styled.h1`
@@ -37,13 +36,13 @@ const Image = styled.img`
 `;
 
 export default function HomePage() {
-  const { currentUser } = useAuth();
   const navigate = useNavigate();
-  console.log(currentUser);
+  // console.log(currentUser);
   const handleLogout = () => {
     localStorage.removeItem("notezy");
     navigate("/");
   };
+
   return (
     <>
       <Flex

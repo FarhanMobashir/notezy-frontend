@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -27,6 +27,40 @@ export default function NoteView() {
   const [noteData, setNoteData] = useState({});
   const [loading, setLoading] = useState(true);
   const [isUpdating, setIsUpdating] = useState(false);
+  const noteHeadingRef = useRef();
+  const noteContentRef = useRef();
+
+  function handleUpdate() {
+    setLoading(true);
+    const name = noteHeadingRef.current.innerText;
+    const notes = noteContentRef.current.innerText;
+    const noteBody = {
+      name,
+      notes,
+    };
+    fetch(apiUrl + `/api/note/${noteId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${currentUser.token}`,
+      },
+      body: JSON.stringify(noteBody),
+    })
+      .then((res) => {
+        // console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        // console.log("Success", data);
+        setLoading(false);
+        setNoteData(data.data);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.error(err);
+      });
+  }
+
   useEffect(() => {
     fetch(apiUrl + `/api/note/${noteId}`, {
       method: "GET",
@@ -48,7 +82,7 @@ export default function NoteView() {
         setLoading(false);
         console.error(err);
       });
-  }, []);
+  }, [noteId, currentUser.token]);
   return (
     <Flex
       justifyContent="center"
@@ -64,29 +98,42 @@ export default function NoteView() {
       ) : (
         <>
           <Link
-            style={{ textDecoration: "none", padding: "20px 10px" }}
+            style={{
+              textDecoration: "none",
+              padding: "20px 10px",
+              width: "100%",
+              textAlign: "center",
+            }}
             to="/home/all"
           >
             &#8592; Back to notes
           </Link>
-          <small>Click to edit</small>
+          {isUpdating ? (
+            <SecondaryButton onClick={handleUpdate}>Update</SecondaryButton>
+          ) : null}
+          {/* <small style={{ width: "100%", textAlign: "center" }}>
+            Click to edit
+          </small> */}
           <NoteHeading
             contentEditable="true"
             suppressContentEditableWarning={true}
+            ref={noteHeadingRef}
             onInput={(e) => {
               setIsUpdating(true);
-              console.log(e.target.innerText);
             }}
           >
             {noteData.name}
           </NoteHeading>
           <NoteContent
             contentEditable="true"
+            ref={noteContentRef}
             suppressContentEditableWarning={true}
+            onInput={(e) => {
+              setIsUpdating(true);
+            }}
           >
             {noteData.notes}
           </NoteContent>
-          {isUpdating ? <SecondaryButton>Update</SecondaryButton> : null}
         </>
       )}
     </Flex>

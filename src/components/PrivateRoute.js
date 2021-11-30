@@ -1,9 +1,8 @@
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
-
-const isAuthenticated = () => {
+import { useLocation, Navigate } from "react-router-dom";
+export const isAuthenticated = () => {
   let notezy = JSON.parse(localStorage.getItem("notezy"));
-  console.log(notezy);
+  // console.log(notezy);
   if (notezy && notezy.value.user) {
     return true;
   } else {
@@ -13,6 +12,7 @@ const isAuthenticated = () => {
 
 export default function PrivateRoute({ children }) {
   let location = useLocation();
+
   if (!isAuthenticated()) {
     return <Navigate to="/" state={{ from: location }} />;
   } else {
