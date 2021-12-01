@@ -43,8 +43,8 @@ export default function AllNotes() {
   }
 
   function confirmDelete() {
-    setDeleteCall(true);
     setShowModal(false);
+    setLoading(true);
 
     fetch(apiUrl + `/api/note/${noteId}`, {
       method: "DELETE",
@@ -55,16 +55,19 @@ export default function AllNotes() {
     })
       .then((res) => {
         setDeleteCall(true);
+
         console.log(res);
         return res.json();
       })
       .then((data) => {
         console.log("Success", data);
         setDeleteCall(false);
+        setLoading(false);
       })
       .catch((err) => {
         setDeleteCall(false);
         console.error(err);
+        setLoading(false);
       });
   }
 
