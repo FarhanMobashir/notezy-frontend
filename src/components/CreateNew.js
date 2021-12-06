@@ -8,6 +8,66 @@ import { Flex } from "./styles/Containers.style";
 import { TextArea, TextInput } from "./styles/Inputs.style";
 import { BasicToastContainer } from "./styles/Toasts.style";
 
+const emojis = [
+  "😀",
+  "😁",
+  "😂",
+  "🤣",
+  "😃",
+  "😄",
+  "🎈",
+  "🎆",
+  "🎇",
+  "🧨",
+  "✨",
+  "🎉",
+  "🎊",
+  "🎃",
+  "👓",
+  "🍕",
+  "🍔",
+  "🍟",
+  "🌭",
+  "🍿",
+  "🧂",
+  "🥓",
+  "🥚",
+  "🍖",
+  "🛹",
+  "🚲",
+  "🚨",
+  "⛽",
+  "🚀",
+  "🚦",
+  "🌍",
+  "🧭",
+  "⛈",
+  "🌧",
+  "⚡",
+  "❄",
+  "🌈",
+  "🎮",
+  "🔊",
+  "📢",
+  "♟",
+  "♥",
+  "🎯",
+  "🏆",
+  "🏀",
+  "🗝",
+  "🔐",
+  "🧪",
+  "🧲",
+  "📸",
+  "📓",
+  "📒",
+  "📔",
+  "📕",
+  "📗",
+  "📘",
+  "💰",
+];
+
 export default function CreateNew() {
   const apiUrl = "https://notezy.herokuapp.com";
   const [success, setSuccess] = useState(false);
@@ -44,11 +104,22 @@ export default function CreateNew() {
       });
   };
 
+  // function handleEmoji(e) {
+  //   const emoji = e.target.innerText;
+  //   titleRef.current.value += emoji;
+  //   titleRef.current.focus();
+  // }
+
+  function getRandomEmoji(emojis) {
+    return emojis[Math.floor(Math.random() * emojis.length)];
+  }
+  console.log(getRandomEmoji(emojis));
   function handleSubmit(e) {
     setLoading(true);
     e.preventDefault();
-
-    const title = titleRef.current.value;
+    let emoji = getRandomEmoji(emojis);
+    const titleVal = titleRef.current.value;
+    let title = emoji + " " + titleVal;
     const content = contentRef.current.value;
     const noteBody = {
       name: title,
@@ -56,6 +127,9 @@ export default function CreateNew() {
     };
     if (title.length === 0 || content.length === 0) {
       setShowError(true);
+      setTimeout(() => {
+        setShowError(false);
+      }, 3000);
       setLoading(false);
     } else {
       setShowError(false);
@@ -70,21 +144,61 @@ export default function CreateNew() {
         <form onSubmit={handleSubmit}>
           <Flex
             flexDirection="column"
-            padding="20px 0px"
+            padding="0px 0px 60px 0px"
             justifyContent="center"
             alignItems="center"
+            height="90vh"
           >
             {success ? (
               <Link
                 style={{ textDecoration: "none" }}
                 to={`/home/notes/${response._id}`}
               >
-                <BasicToastContainer bgColor="green">
+                <BasicToastContainer margin="10px 0px" bgColor="green">
                   View note here
                 </BasicToastContainer>
               </Link>
             ) : null}
-            <TextInput ref={titleRef} placeholder="Enter your title" />
+            {/* <small
+              onClick={handleEmoji}
+              style={{
+                fontSize: "14px",
+                padding: "5px 0px",
+                margin: "0px",
+              }}
+            >
+              Scroll to view more emoji
+            </small>
+            <div
+              style={{
+                overflow: "scroll",
+                display: "flex",
+                width: "300px",
+                padding: "0",
+                margin: "0",
+              }}
+            >
+              {emojis.map((emoji) => (
+                <small
+                  onClick={handleEmoji}
+                  style={{
+                    fontSize: "32px",
+                    padding: "0px",
+                    margin: "20px 5px",
+                  }}
+                >
+                  {emoji}
+                </small>
+              ))}
+            </div> */}
+
+            <TextInput
+              borderRadius="2px"
+              border="1px solid grey"
+              width="90%"
+              ref={titleRef}
+              placeholder="Enter your title"
+            />
             <TextArea
               ref={contentRef}
               width="90%"

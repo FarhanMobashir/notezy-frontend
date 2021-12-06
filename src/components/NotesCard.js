@@ -16,7 +16,7 @@ export const NotesCard = ({ noteHeading, notePreview, link, handleDelete }) => {
       </Flex>
       <NotePreview>{notePreview}</NotePreview>
       <Flex justifyContent="space-between" alignItems="center">
-        <ViewPill bgColor="#ff683b" onClick={handleDelete}>
+        <ViewPill bgColor="red" onClick={handleDelete}>
           Delete
         </ViewPill>
         <NavLink to={link}>

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 const Heading = styled.h1`
   text-decoration: none;
-  color: black;
+  color: ${(props) => props.color || "black"};
   text-align: center;
 
   @media (max-width: 480px) {
@@ -44,41 +44,47 @@ export default function HomePage() {
   };
 
   return (
-    <>
+    <Flex flexDirection="column">
       <Flex
         justifyContent="space-around"
-        bgColor={({ theme }) => theme.colors.primary100}
+        bgColor={({ theme }) => theme.colors.primary300}
         alignItems="center"
       >
         <Link style={{ textDecoration: "none" }} to="/home">
-          <Heading>Notezy</Heading>
+          <Heading color="white">Notezy</Heading>
         </Link>
         <ViewPill onClick={handleLogout}>Logout</ViewPill>
       </Flex>
       <Flex
         justifyContent="space-around"
-        bgColor={({ theme }) => theme.colors.primary100}
+        bgColor={({ theme }) => theme.colors.primary300}
         alignItems="center"
+        width="100%"
         position="sticky"
-        top="0px"
+        top="0"
         padding="10px 0px"
       >
         <Link to="/home/all">
-          <TertiaryButton>All notes</TertiaryButton>
+          <TertiaryButton padding="5px 10px">All notes</TertiaryButton>
         </Link>
         <Link to="/home/new">
-          <TertiaryButton>Create New</TertiaryButton>
+          <TertiaryButton padding="5px 10px">Create New</TertiaryButton>
         </Link>
       </Flex>
       <Outlet />
-    </>
+    </Flex>
   );
 }
 
 export const HomeGreet = ({ heading, subHeading }) => {
   return (
-    <>
-      <Flex justifyContent="center" alignItems="center" flexDirection="column">
+    <Flex flexDirection="column">
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+        height="50vh"
+      >
         <Heading>{heading}</Heading>
         <SubHeading>{subHeading}</SubHeading>
 
@@ -92,6 +98,6 @@ export const HomeGreet = ({ heading, subHeading }) => {
           <PrimaryButton margin="0px 10px">Create New</PrimaryButton>
         </Link>
       </Flex>
-    </>
+    </Flex>
   );
 };

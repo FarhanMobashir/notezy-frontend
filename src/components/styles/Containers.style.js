@@ -19,24 +19,30 @@ export const Flex = styled.div`
   }};
   flex: ${(props) => props.flex || "0"};
   height: ${(props) => props.height};
+  width: ${(props) => props.width};
   background-color: ${(props) => props.bgColor};
   flex-wrap: ${(props) => props.wrap};
   position: ${(props) => props.position};
   top: ${(props) => props.top};
   bottom: ${(props) => props.bottom};
   padding: ${(props) => props.padding};
+  @media (max-width: 480px) {
+    order: ${(props) => props.orderMobile};
+  }
 `;
 
 export const Card = styled.div`
-  border: 4px solid ${({ theme }) => theme.colors.black200};
-  box-shadow: 0px 0px 5px ${({ theme }) => theme.colors.black200};
+  border: 0px solid ${({ theme }) => theme.colors.black200};
+
   padding: 10px 20px;
   width: 400px;
-  border-radius: 10px;
+  border-radius: 14px;
+  background: #e0e0e0;
+  box-shadow: 7px 7px 14px #a4a4a4, -7px -7px 14px #ffffff;
   margin: 10px 20px;
   &:hover {
-    border: 4px solid ${({ theme }) => theme.colors.primary300};
-    transition: 0.5s;
+    transform: scale(1.02);
+    transition: 0.2s;
   }
 
   @media (max-width: 480px) {

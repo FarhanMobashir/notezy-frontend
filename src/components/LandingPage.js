@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { PrimaryButton, SecondaryButton } from "./styles/Buttons.style";
 import { Flex } from "./styles/Containers.style";
 import notes from "../assets/notes.svg";
+import googlePlay from "../assets/google-play.png";
 import { isAuthenticated } from "./PrivateRoute";
 const Heading = styled.h1`
   font-size: 48px;
@@ -12,6 +13,7 @@ const Heading = styled.h1`
 
 const SubHeading = styled.p`
   font-size: 18px;
+  margin: 5px 0px;
 `;
 
 const Image = styled.img`
@@ -34,7 +36,7 @@ export default function LandingPage() {
       {/* <h1 style={{ padding: "10px" }} contentEditable="true">
         Heelo melo
       </h1> */}
-      <Heading>Notezy</Heading>
+      <Heading>Mera Notebook</Heading>
       <SubHeading>Note making become easy</SubHeading>
       <Image src={notes}></Image>
       <Flex justifyContent="space-between" alignItems="center">
@@ -44,6 +46,18 @@ export default function LandingPage() {
         <Link to="/signup">
           <SecondaryButton margin="0px 5px">Signup</SecondaryButton>
         </Link>
+      </Flex>
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        margin="20px 0px 0px 0px"
+      >
+        <img
+          style={{ width: "150px", height: "auto" }}
+          src={googlePlay}
+          alt="googleplay"
+        />
+        <SubHeading>Coming soon</SubHeading>
       </Flex>
     </Flex>
   );

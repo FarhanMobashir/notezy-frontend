@@ -8,4 +8,8 @@ export const GlobalStyles = createGlobalStyle`
         margin:0;
         font-family: 'Rubik',sans-serif;
     }
+    ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
 `;

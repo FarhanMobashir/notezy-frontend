@@ -9,7 +9,7 @@ export default function Modal({ primaryHandler, cancelHandler }) {
         flexDirection="column"
         padding="40px 60px"
         width="100%"
-        border="5px solid red"
+        border="5px solid grey"
         borderRadius="10px"
       >
         <h4 style={{ textAlign: "center" }}>

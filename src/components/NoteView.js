@@ -8,14 +8,20 @@ import { SecondaryButton } from "./styles/Buttons.style";
 import { Flex } from "./styles/Containers.style";
 
 const NoteHeading = styled.h1`
-  align-self: flex-start;
   padding: 0px 20px;
   outline: none;
   width: 100%;
 `;
-const NoteContent = styled.p`
-  text-align: left;
-  padding: 0px 20px;
+const NoteContent = styled.div`
+  padding-top: 6px;
+  padding-left: 20px;
+  padding-right: 16px;
+  line-height: 24px;
+  font-size: 19px;
+  letter-spacing: 1px;
+  word-spacing: 5px;
+  // font-family: "Bradley Hand", cursive;
+  height: auto;
   align-self: flex-start;
   outline: none;
 `;
@@ -85,8 +91,8 @@ export default function NoteView() {
   }, [noteId, currentUser.token]);
   return (
     <Flex
-      justifyContent="center"
-      alignItems="center"
+      justifyContent=""
+      alignItems="flex-start"
       flexDirection="column"
       wrap="wrap"
       padding="20px 0px"
@@ -99,17 +105,27 @@ export default function NoteView() {
         <>
           <Link
             style={{
-              textDecoration: "none",
-              padding: "20px 10px",
-              width: "100%",
+              alignSelf: "flex-start",
+              textDecoration: "underline",
+              padding: "20px 20px",
               textAlign: "center",
+              fontSize: "18px",
+              display: "flex",
+              justifyContent: "center",
+              color: "black",
+              alignItems: "center",
             }}
             to="/home/all"
           >
-            &#8592; Back to notes
+            <small>{`< < Back to notes`}</small>
           </Link>
+          <small style={{ paddingLeft: "20px" }}>
+            {!isUpdating ? "Click on the notes to edit" : ""}
+          </small>
           {isUpdating ? (
-            <SecondaryButton onClick={handleUpdate}>Update</SecondaryButton>
+            <SecondaryButton margin="0px 10px" onClick={handleUpdate}>
+              Update
+            </SecondaryButton>
           ) : null}
           {/* <small style={{ width: "100%", textAlign: "center" }}>
             Click to edit

@@ -15,6 +15,7 @@ export default function AllNotes() {
   const [showModal, setShowModal] = useState(false);
   const [noteId, setNoteId] = useState("");
   useEffect(() => {
+    setLoading(true);
     fetch(apiUrl + "/api/note", {
       method: "GET",
       headers: {
@@ -55,7 +56,6 @@ export default function AllNotes() {
     })
       .then((res) => {
         setDeleteCall(true);
-
         console.log(res);
         return res.json();
       })
@@ -74,9 +74,10 @@ export default function AllNotes() {
   return (
     <Flex
       justifyContent="center"
-      alignItems="center"
+      alignItems="baseline"
       flexDirection="row"
       wrap="wrap"
+      padding="10px 0px 80px 0px"
     >
       {loading ? (
         <>
