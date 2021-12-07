@@ -51,7 +51,7 @@ export default function HomePage() {
         alignItems="center"
       >
         <Link style={{ textDecoration: "none" }} to="/home">
-          <Heading color="white">Notezy</Heading>
+          <Heading color="white">MeraNotebook</Heading>
         </Link>
         <ViewPill onClick={handleLogout}>Logout</ViewPill>
       </Flex>
