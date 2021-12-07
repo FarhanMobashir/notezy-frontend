@@ -50,7 +50,7 @@ export default function LandingPage() {
       <Flex
         flexDirection="column"
         alignItems="center"
-        margin="20px 0px 0px 0px"
+        margin="60px 0px 0px 0px"
       >
         <img
           style={{ width: "150px", height: "auto" }}
