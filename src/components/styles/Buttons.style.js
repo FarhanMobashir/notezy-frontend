@@ -11,7 +11,7 @@ const BaseButton = styled.button`
   min-width: 150px;
   margin: ${(props) => props.margin};
   @media (max-width: 480px) {
-    padding: 8px 10px;
+    padding: 14px 10px;
     font-size: 14px;
     min-width: 100px;
   }

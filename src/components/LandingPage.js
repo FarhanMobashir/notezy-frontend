@@ -40,11 +40,11 @@ export default function LandingPage() {
       <SubHeading>Note making become easy</SubHeading>
       <Image src={notes}></Image>
       <Flex justifyContent="space-between" alignItems="center">
-        <Link to="/signin">
-          <PrimaryButton margin="0px 5px">Login</PrimaryButton>
-        </Link>
         <Link to="/signup">
           <SecondaryButton margin="0px 5px">Signup</SecondaryButton>
+        </Link>
+        <Link to="/signin">
+          <PrimaryButton margin="0px 5px">Login</PrimaryButton>
         </Link>
       </Flex>
       <Flex
